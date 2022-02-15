@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+void solve(ll arr[], ll n, ll x)
+{
+    ll l, r;
+ 
+    //initialize left index for
+    //binary search with 0.
+    l = 0;
+ 
+    //initialize right index for
+    //binary search with n-1.
+    r = n - 1;
+ 
+    //initialize first and last
+    //variable with -1.
+    ll first = -1;
+    ll last = -1;
+
+    //perform binary search.
+    while (l <= r) {
+        //mid index=(l+r)/2.
+        //avoid maximum overflow condition.
+        ll mid = l + (r - l) / 2;
+
+        //if array element is equal
+        //to x.
+        if (arr[mid] == x) {
+            first = mid; //assign first index.
+            r = mid - 1; //move in left range.
+        }
+        //if mid element is greater than
+        //element x.
+        if (arr[mid] > x)
+            r = mid - 1;
+        //if mid element is smaller than
+        //element x.
+        if (arr[mid] < x)
+            l = mid + 1;
+    }
+
+    //again initialize left and right index.
+    l = 0;
+    r = n - 1;
+
+    //perform binary search.
+    while (l <= r) {
+        //mid index.
+        ll mid = l + (r - l) / 2;
+        if (arr[mid] == x) {
+            last = mid; //assign right index.
+            l = mid + 1; //move in right range.
+        }
+        //if mid element is greater.
+        if (arr[mid] > x)
+            r = mid - 1;
+        //if mid element is smaller.
+        if (arr[mid] < x)
+            l = mid + 1;
+    }
+    //if first is not -1.
+    if (first != -1)
+        cout << first << " " << last << "\n";
+    else
+        cout << -1 << "\n";
+}
